@@ -18,4 +18,6 @@ public class UserRestController {
     public void add(@RequestBody NewUserDto userDto) {
         userService.addUser(userDto);
     }
+
+
 }

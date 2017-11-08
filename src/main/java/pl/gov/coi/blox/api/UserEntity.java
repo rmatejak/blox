@@ -1,4 +1,4 @@
-package pl.gov.coi.blox.repository;
+package pl.gov.coi.blox.api;
 
 import lombok.Getter;
 import lombok.Setter;

@@ -3,8 +3,8 @@ package pl.gov.coi.blox.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import pl.gov.coi.blox.api.NewUserDto;
-import pl.gov.coi.blox.repository.UserEntity;
-import pl.gov.coi.blox.repository.UserRepository;
+import pl.gov.coi.blox.api.UserEntity;
+import pl.gov.coi.blox.api.UserRepository;
 
 @Service
 @RequiredArgsConstructor
