@@ -1,16 +1,14 @@
-package pl.gov.coi.blox.api;
+package pl.gov.coi.blox.entity;
 
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-public class NewUserDto {
+public class UserDto {
 
-    private int ID;
     private String login;
+    private String username;
     private String password;
     private String email;
-    private String dateOfRejestration;
-
 }

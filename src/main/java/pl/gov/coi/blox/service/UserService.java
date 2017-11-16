@@ -1,24 +1,15 @@
 package pl.gov.coi.blox.service;
 
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
-import pl.gov.coi.blox.api.NewUserDto;
-import pl.gov.coi.blox.api.UserEntity;
-import pl.gov.coi.blox.api.UserRepository;
+import pl.gov.coi.blox.entity.UserDto;
+import pl.gov.coi.blox.entity.UserViewDto;
 
-@Service
-@RequiredArgsConstructor
-public class UserService {
+import java.util.List;
 
-    private final UserRepository userRepository;
-
-    public void addUser(NewUserDto userDto) {
-        System.out.println("Dodany zostanie user o loginie: " + userDto.getLogin());
-        System.out.println("Dodany zostanie user o hasle: " + userDto.getPassword());
-        UserEntity userEntity = new UserEntity();
-        userEntity.setLogin(userDto.getLogin());
-        userEntity.setPassword(userDto.getPassword());
-        userRepository.save(userEntity);
-    }
+public interface UserService {
+    void addUser(UserDto userForm);
+    void deleteUser(Long id);
+    void deleteAllUsers();
+    UserViewDto getUserById(Long id);
+    List<UserViewDto> getAllUsers();
 
 }
