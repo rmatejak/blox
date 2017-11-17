@@ -4,10 +4,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import pl.gov.coi.blox.api.Mapper.UserMapper;
 import pl.gov.coi.blox.api.Mapper.UserMapperImpl;
-import pl.gov.coi.blox.api.UserRepository;
+import pl.gov.coi.blox.repository.UserRepository;
 import pl.gov.coi.blox.entity.UserDto;
 import pl.gov.coi.blox.entity.UserViewDto;
-import pl.gov.coi.blox.repository.model.UserEntity;
+import pl.gov.coi.blox.model.UserEntity;
 
 import java.util.List;
 

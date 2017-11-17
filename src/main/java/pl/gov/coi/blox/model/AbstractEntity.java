@@ -1,4 +1,4 @@
-package pl.gov.coi.blox.repository.model;
+package pl.gov.coi.blox.model;
 
 import lombok.Getter;
 

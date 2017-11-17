@@ -1,4 +1,4 @@
-package pl.gov.coi.blox.repository.model;
+package pl.gov.coi.blox.model;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -19,8 +19,8 @@ public class BlogEntity extends AbstractEntity{
     private int rating;
     @Column (name = "TYPE", nullable = false)
     private CategoryType type;
-    @Column (name = "COMMENT")
-    private String comment;
+    @Column (name = "CONTENT")
+    private String text;
 
     @OneToMany
     Set<CategoryEntity> categories = new HashSet<>();

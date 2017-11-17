@@ -1,4 +1,4 @@
-package pl.gov.coi.blox.repository.model;
+package pl.gov.coi.blox.model;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -22,7 +22,7 @@ public class ArticleEntity  extends AbstractEntity{
     private String topic;
     @Column (name = "DATE_OF_CREATION", nullable = false, length = 30)
     private String dateOfCreation;
-    @Column (name = "TEXT",length = 300)
+    @Column (name = "CONTENT",length = 300)
     private String text;
     @Column (name = "RATING")
     private int rating;

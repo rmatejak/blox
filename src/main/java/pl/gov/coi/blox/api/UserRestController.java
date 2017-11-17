@@ -16,7 +16,7 @@ public class UserRestController {
     private final UserService userService;
 
     @PostMapping("/")
-    public void add(@RequestBody UserDto userDto) {
+    public void addUser(@RequestBody UserDto userDto) {
         userService.addUser(userDto);
     }
 
@@ -30,7 +30,7 @@ public class UserRestController {
     }
 
     @GetMapping("/{id}")
-    public UserViewDto get(@PathVariable("id") Long id){
+    public UserViewDto getUser(@PathVariable("id") Long id){
         return userService.getUserById(id);
     }
 
