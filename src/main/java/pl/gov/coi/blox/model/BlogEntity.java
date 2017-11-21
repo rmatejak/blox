@@ -3,43 +3,41 @@ package pl.gov.coi.blox.model;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
 @Getter
 @Setter
-@Table (name = "BLOG")
-public class BlogEntity extends AbstractEntity{
+@Table(name = "BLOG")
+public class BlogEntity extends AbstractEntity {
 
-    @Column (name = "AUTHOR", nullable = false, length = 30)
-    private String author;
-    @Column (name = "RATING", nullable = false)
-    private int rating;
-    @Column (name = "TYPE", nullable = false)
-    private CategoryType type;
-    @Column (name = "CONTENT")
-    private String text;
-
-    @OneToMany
-    Set<CategoryEntity> categories = new HashSet<>();
+    @Column(name = "RATE")
+    private int rate;
+    @Column(name = "TYPE", nullable = false)
+    private BlogType type;
+    @Column(name = "CONTENT")
+    private String description;
+    @Column(name = "AVAILABILITY")
+    private boolean isActive;
 
     @OneToMany
-    Set<CommentEntity> comments = new HashSet<>();
-
-    @ManyToMany
     @JoinTable(
-            name = "BLOG_RATING",
+            name = "USER_CATEGORY",
             joinColumns = @JoinColumn(name = "ID_USER"),
-            inverseJoinColumns = @JoinColumn(name = "RATING"))
-    private Set<RatingEntity> ratings = new HashSet<>();
+            inverseJoinColumns = @JoinColumn(name = "ID_CATEGORY"))
+    private Set<CategoryEntity> categories = new HashSet<>();
 
-    @ManyToMany
+    @OneToMany
     @JoinTable(
-            name = "BLOG_AVAILABILITY",
-            joinColumns = @JoinColumn(name = "ID_BLOG"),
-            inverseJoinColumns = @JoinColumn(name = "ID_AVAILABILITY"))
-    private Set<AvailabilityEntity> availabilities = new HashSet<>();
-
+            name = "USER_COMMENT",
+            joinColumns = @JoinColumn(name = "ID_USER"),
+            inverseJoinColumns = @JoinColumn(name = "ID_COMMENT"))
+    private Set<CommentEntity> comments = new HashSet<>();
 }

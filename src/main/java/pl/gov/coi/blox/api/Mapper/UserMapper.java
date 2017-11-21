@@ -10,10 +10,7 @@ import java.util.List;
 
 @Mapper
 public interface UserMapper {
-
     UserEntity map(UserDto userDto);
     UserViewDto map(UserEntity userEntity);
     List<UserViewDto> map(Collection<UserEntity> users);
-
-
 }

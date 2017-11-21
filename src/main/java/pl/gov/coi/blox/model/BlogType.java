@@ -1,6 +1,6 @@
 package pl.gov.coi.blox.model;
 
-public enum CategoryType{
+public enum BlogType {
     KOD,
     BLAD,
     PORADNIK

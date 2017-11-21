@@ -13,4 +13,6 @@ public abstract class AbstractEntity {
     @Id
     @GeneratedValue
     private Long id;
+    String dateOfCreation;
+    String dateOfLastActualization;
 }

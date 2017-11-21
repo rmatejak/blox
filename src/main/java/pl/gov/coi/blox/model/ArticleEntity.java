@@ -4,7 +4,12 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -13,27 +18,20 @@ import java.util.Set;
 @Setter
 @RequiredArgsConstructor
 @Table(name = "ARTICLE")
-public class ArticleEntity  extends AbstractEntity{
+public class ArticleEntity extends AbstractEntity {
 
-
-    @Column (name = "LOGIN", nullable = false, length = 30)
+    @Column(name = "LOGIN", nullable = false, length = 30)
     private String author;
-    @Column (name = "TOPIC", nullable = false, length = 150)
+    @Column(name = "TOPIC", nullable = false, length = 150)
     private String topic;
-    @Column (name = "DATE_OF_CREATION", nullable = false, length = 30)
-    private String dateOfCreation;
-    @Column (name = "CONTENT",length = 300)
+    @Column(name = "CONTENT", length = 300)
     private String text;
-    @Column (name = "RATING")
+    @Column(name = "RATING")
     private int rating;
-
     @OneToMany
-    private Set<CommentEntity> comments = new HashSet<>();
-
-    @ManyToMany
     @JoinTable(
-            name = "ARTICLE_AVAILABILITY",
+            name = "ARTICLE_COMMENT",
             joinColumns = @JoinColumn(name = "ID_ARTICLE"),
-            inverseJoinColumns = @JoinColumn(name = "ID_AVAILABILITY"))
-    private Set<AvailabilityEntity> availabilities = new HashSet<>();
+            inverseJoinColumns = @JoinColumn(name = "ID_COMMENT"))
+    private Set<CommentEntity> comments = new HashSet<>();
 }

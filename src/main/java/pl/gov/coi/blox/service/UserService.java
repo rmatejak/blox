@@ -2,7 +2,6 @@ package pl.gov.coi.blox.service;
 
 import pl.gov.coi.blox.entity.UserDto;
 import pl.gov.coi.blox.entity.UserViewDto;
-
 import java.util.List;
 
 public interface UserService {
