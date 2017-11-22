@@ -5,6 +5,8 @@ import lombok.Setter;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
@@ -18,14 +20,16 @@ import java.util.Set;
 @Table(name = "BLOG")
 public class BlogEntity extends AbstractEntity {
 
+    @Enumerated (EnumType.STRING)
     @Column(name = "RATE")
-    private int rate;
-    @Column(name = "TYPE", nullable = false)
-    private BlogType type;
+    private RateType rateType;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "TYPE")
+    private BlogType blogType;
     @Column(name = "CONTENT")
     private String description;
     @Column(name = "AVAILABILITY")
-    private boolean isActive;
+    private boolean active;
 
     @OneToMany
     @JoinTable(

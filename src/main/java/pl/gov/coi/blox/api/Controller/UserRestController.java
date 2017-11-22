@@ -1,6 +1,7 @@
-package pl.gov.coi.blox.api;
+package pl.gov.coi.blox.api.Controller;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,12 +23,10 @@ public class UserRestController {
 
     @PostMapping("/")
     public void addUser(@RequestBody UserDto userDto) { userService.addUser(userDto); }
-    @GetMapping("/delete/{id}")
+    @DeleteMapping("/delete/{id}")
     public void deleteUser(@PathVariable("id") Long id) { userService.deleteUser(id); }
-    @GetMapping("/delete/all")
-    public void deleteAllUsers() {
-        userService.deleteAllUsers();
-    }
+    @DeleteMapping("/delete/all")
+    public void deleteAllUsers() { userService.deleteAllUsers(); }
     @GetMapping("/{id}")
     public UserViewDto getUser(@PathVariable("id") Long id) { return userService.getUserById(id); }
     @GetMapping("/")

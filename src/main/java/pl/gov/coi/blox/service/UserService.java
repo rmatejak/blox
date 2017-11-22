@@ -2,10 +2,11 @@ package pl.gov.coi.blox.service;
 
 import pl.gov.coi.blox.entity.UserDto;
 import pl.gov.coi.blox.entity.UserViewDto;
+
 import java.util.List;
 
 public interface UserService {
-    void addUser(UserDto userForm);
+    void addUser(UserDto userDto);
     void deleteUser(Long id);
     void deleteAllUsers();
     UserViewDto getUserById(Long id);

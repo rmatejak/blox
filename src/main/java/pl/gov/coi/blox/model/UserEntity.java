@@ -5,6 +5,8 @@ import lombok.Setter;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
@@ -29,6 +31,10 @@ public class UserEntity extends AbstractEntity {
     private String password;
     @Column(name = "EMAIL", nullable = false, length = 50, unique = true)
     private String email;
+    @Column (name = "ROLA", nullable = false)
+    @Enumerated(EnumType.STRING)
+    private RoleType roleType;
+
     @OneToMany
     @JoinTable(
             name = "USER_BLOG",

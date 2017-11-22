@@ -18,7 +18,7 @@ public class UserServiceImpl implements UserService {
     private final static UserMapper usermapper = new UserMapperImpl();
 
     public void addUser(UserDto userDto) {
-        System.out.println("Dodanie usera: "+userDto.getLogin()+" "+userDto.getUsername()+" "+userDto.getEmail()+" "+userDto.getPassword());
+        System.out.println("Dodanie usera: "+userDto.getLogin()+" "+userDto.getName()+" "+userDto.getSecondname()+" "+userDto.getEmail()+" "+userDto.getPassword()+" "+userDto.getRoleType());
         UserEntity userEntity = usermapper.map(userDto);
         userRepository.save(userEntity);
     }
