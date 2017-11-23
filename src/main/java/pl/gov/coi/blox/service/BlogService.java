@@ -4,6 +4,6 @@ import pl.gov.coi.blox.entity.BlogViewDto;
 
 
 public interface BlogService {
-    void createBlog (BlogDto blogForm);
+    void addBlogToUser (BlogDto blogDto);
     BlogViewDto getBlogById(Long id);
 }

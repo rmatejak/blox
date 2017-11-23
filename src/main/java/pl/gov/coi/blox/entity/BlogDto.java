@@ -6,10 +6,23 @@ import pl.gov.coi.blox.model.RateType;
 
 public class BlogDto {
 
+    private Long ownerId;
     private RateType rateType;
     private BlogType blogType;
     private String description;
     private boolean active;
+
+    public Long getOwnerId() {
+        return ownerId;
+    }
+
+    public void setOwnerId(Long ownerId) {
+        this.ownerId = ownerId;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
 
     public boolean getActive() { return active; }
 

@@ -53,4 +53,8 @@ public class UserEntity extends AbstractEntity {
             joinColumns = @JoinColumn(name = "ID_USER"),
             inverseJoinColumns = @JoinColumn(name = "ID_ROLE"))
     private Set<RoleEntity> roles = new HashSet<>();
+
+    public void addBlog(BlogEntity blogEntity) {
+        this.blogs.add(blogEntity);
+    }
 }
