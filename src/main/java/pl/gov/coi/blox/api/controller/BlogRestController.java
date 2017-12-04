@@ -1,4 +1,4 @@
-package pl.gov.coi.blox.api.Controller;
+package pl.gov.coi.blox.api.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,6 +11,8 @@ import pl.gov.coi.blox.entity.BlogDto;
 import pl.gov.coi.blox.entity.BlogViewDto;
 import pl.gov.coi.blox.service.BlogService;
 
+import javax.validation.Valid;
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/blog")
@@ -19,7 +21,7 @@ public class BlogRestController {
     private final BlogService blogService;
 
     @PutMapping("/new")
-    public void addBlogToUser(@RequestBody BlogDto blogDto) {
+    public void addBlogToUser(@Valid @RequestBody BlogDto blogDto) {
         blogService.addBlogToUser(blogDto);
     }
 

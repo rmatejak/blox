@@ -12,6 +12,7 @@ public class UserDto {
     private String secondname;
     private String login;
     private String password;
+    private String confirmedPassword;
     private String email;
     private RoleType roleType;
 }

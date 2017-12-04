@@ -24,11 +24,11 @@ public class BlogEntity extends AbstractEntity {
     @Column(name = "RATE")
     private RateType rateType;
     @Enumerated(EnumType.STRING)
-    @Column(name = "TYPE")
+    @Column(name = "TYPE", nullable = false)
     private BlogType blogType;
     @Column(name = "CONTENT")
     private String description;
-    @Column(name = "AVAILABILITY")
+    @Column(name = "AVAILABILITY",nullable = false)
     private boolean active;
 
     @OneToMany

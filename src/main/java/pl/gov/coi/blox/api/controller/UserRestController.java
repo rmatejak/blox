@@ -1,4 +1,4 @@
-package pl.gov.coi.blox.api.Controller;
+package pl.gov.coi.blox.api.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.DeleteMapping;

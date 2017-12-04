@@ -29,6 +29,8 @@ public class UserEntity extends AbstractEntity {
     private String login;
     @Column(name = "PASSWORD", nullable = false, length = 30)
     private String password;
+    @Column(name = "CONFIRMED_PASSWORD", nullable = false, length = 30)
+    private String confirmedPassword;
     @Column(name = "EMAIL", nullable = false, length = 50, unique = true)
     private String email;
     @Column (name = "ROLA", nullable = false)
