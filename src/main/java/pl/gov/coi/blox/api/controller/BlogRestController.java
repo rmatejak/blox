@@ -1,32 +1,52 @@
 package pl.gov.coi.blox.api.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.apache.http.protocol.HTTP;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import pl.gov.coi.blox.entity.BlogDto;
-import pl.gov.coi.blox.entity.BlogViewDto;
+import pl.gov.coi.blox.api.BlogsApi;
+import pl.gov.coi.blox.api.model.BlogDto;
+import pl.gov.coi.blox.api.model.BlogViewDto;
+import pl.gov.coi.blox.api.model.RateDto;
+import pl.gov.coi.blox.api.model.RateTypeDto;
 import pl.gov.coi.blox.service.BlogService;
 
 import javax.validation.Valid;
 
+
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/blog")
-public class BlogRestController {
+@RequestMapping("/api")
+public class BlogRestController implements BlogsApi {
 
     private final BlogService blogService;
 
-    @PutMapping("/new")
-    public void addBlogToUser(@Valid @RequestBody BlogDto blogDto) {
+
+    @Override
+    public ResponseEntity<Void> addBlogToUser(@Valid @RequestBody BlogDto blogDto) {
         blogService.addBlogToUser(blogDto);
+        return new ResponseEntity<Void>(HttpStatus.OK);
     }
 
-    @GetMapping("/{id}")
-    public BlogViewDto getBlog(@PathVariable("id")Long id) {
-        return blogService.getBlogById(id);
+    @Override
+    public ResponseEntity<Void> addRatingToBlog(@Valid @PathVariable  Long id,@Valid @RequestBody RateDto rateDto) {
+        blogService.addRatingToBlog(id, rateDto);
+        return new ResponseEntity<Void>(HttpStatus.OK);
+    }
+
+
+    @Override
+    public ResponseEntity<Void> deleteBlogById(@Valid @PathVariable Long id) {
+        blogService.deleteBlogById(id);
+        return new ResponseEntity<Void>(HttpStatus.OK);
+    }
+
+    @Override
+    public ResponseEntity<BlogViewDto> getBlogById(@Valid @PathVariable Long id) {
+        return new ResponseEntity<BlogViewDto>(blogService.getBlogById(id), HttpStatus.OK);
     }
 }

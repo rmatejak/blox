@@ -1,4 +1,4 @@
-package pl.gov.coi.blox.model;
+package pl.gov.coi.blox.entity;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -24,7 +24,7 @@ public class UserEntity extends AbstractEntity {
     @Column(name = "IMIE", nullable = false, length = 30)
     private String name;
     @Column(name = "NAZWISKO", nullable = false, length = 30)
-    private String secondname;
+    private String secondName;
     @Column(name = "LOGIN", nullable = false, length = 30, unique = true)
     private String login;
     @Column(name = "PASSWORD", nullable = false, length = 30)
@@ -37,17 +37,9 @@ public class UserEntity extends AbstractEntity {
     @Enumerated(EnumType.STRING)
     private RoleType roleType;
 
-    @OneToMany
-    @JoinTable(
-            name = "USER_BLOG",
-            joinColumns = @JoinColumn(name = "ID_USER"),
-            inverseJoinColumns = @JoinColumn(name = "ID_BLOG"))
+    @OneToMany(mappedBy = "owner")
     private Set<BlogEntity> blogs = new HashSet<>();
-    @OneToMany
-    @JoinTable(
-            name = "USER_COMMENT",
-            joinColumns = @JoinColumn(name = "ID_USER"),
-            inverseJoinColumns = @JoinColumn(name = "ID_COMMENT"))
+    @OneToMany(mappedBy = "userOwner")
     private Set<CommentEntity> comments = new HashSet<>();
     @ManyToMany
     @JoinTable(
@@ -58,5 +50,11 @@ public class UserEntity extends AbstractEntity {
 
     public void addBlog(BlogEntity blogEntity) {
         this.blogs.add(blogEntity);
+        blogEntity.setOwner(this);
+    }
+
+    public void removeBlog(BlogEntity blogEntity) {
+        this.blogs.remove(blogEntity);
+        blogEntity.setOwner(null);
     }
 }

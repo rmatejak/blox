@@ -1,4 +1,4 @@
-package pl.gov.coi.blox.model;
+package pl.gov.coi.blox.entity;
 
 public enum RoleType {
     USER,
