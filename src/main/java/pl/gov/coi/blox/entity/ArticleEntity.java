@@ -26,7 +26,7 @@ public class ArticleEntity extends AbstractEntity {
 
     @OneToOne
     private CategoryEntity owner;
-    @Column(name = "LOGIN", nullable = false, length = 30)
+    @Column(name = "AUTHOR", nullable = false, length = 30)
     private String author;
     @Column(name = "TOPIC", nullable = false, length = 150)
     private String topic;
@@ -44,6 +44,7 @@ public class ArticleEntity extends AbstractEntity {
 
     public void addComment(CommentEntity commentEntity){
         this.comments.add(commentEntity);
+        commentEntity.setArticleOwner(this);
     }
 
     public void addRate(RateType rate){

@@ -13,9 +13,6 @@
   "paths": {
     "/users": {
       "get": {
-        "tags": [
-          "users"
-        ],
         "summary": "Returns a list of all users",
         "operationId": "getAllUsers",
         "produces": [
@@ -52,9 +49,6 @@
         }
       },
       "post": {
-        "tags": [
-          "users"
-        ],
         "summary": "Add a user",
         "operationId": "addUser",
         "consumes": [
@@ -98,9 +92,6 @@
     },
     "/users/{id}": {
       "get": {
-        "tags": [
-          "users"
-        ],
         "summary": "Returns a single user by ID",
         "operationId": "getUserById",
         "produces": [
@@ -145,9 +136,6 @@
         }
       },
       "put": {
-        "tags": [
-          "users"
-        ],
         "summary": "Updates a user by ID",
         "operationId": "updateUser",
         "parameters": [
@@ -200,9 +188,6 @@
         }
       },
       "delete": {
-        "tags": [
-          "users"
-        ],
         "summary": "Deletes a user by ID",
         "operationId": "deleteUser",
         "parameters": [
@@ -241,17 +226,23 @@
         }
       }
     },
-    "/blogs": {
+    "/users/{id}/blogs": {
       "post": {
-        "tags": [
-          "blogs"
-        ],
         "summary": "Creating a blog for the user",
         "operationId": "addBlogToUser",
         "produces": [
           "application/json"
         ],
         "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "integer",
+            "format": "int64",
+            "minimum": 1,
+            "description": "ID of a user"
+          },
           {
             "in": "body",
             "name": "BlogDto",
@@ -288,9 +279,6 @@
     },
     "/blogs/{id}": {
       "get": {
-        "tags": [
-          "blogs"
-        ],
         "summary": "Returns a single blog by ID",
         "operationId": "getBlogById",
         "produces": [
@@ -335,9 +323,6 @@
         }
       },
       "delete": {
-        "tags": [
-          "blogs"
-        ],
         "summary": "Deletes blog by ID",
         "operationId": "deleteBlogById",
         "parameters": [
@@ -378,9 +363,6 @@
     },
     "/blogs/{id}/rate": {
       "put": {
-        "tags": [
-          "blogs"
-        ],
         "summary": "Adding a rating to your blog",
         "operationId": "AddRatingToBlog",
         "produces": [
@@ -436,11 +418,8 @@
         }
       }
     },
-    "/category": {
+    "/blogs/{id}/category": {
       "post": {
-        "tags": [
-          "category"
-        ],
         "summary": "Adding category to blog",
         "operationId": "addCategoryToBlog",
         "produces": [
@@ -490,17 +469,23 @@
         }
       }
     },
-    "/article": {
+    "/category/{id}/article": {
       "post": {
-        "tags": [
-          "articles"
-        ],
         "summary": "Adding article to category",
         "operationId": "addArticleToCategory",
         "produces": [
           "application/json"
         ],
         "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "type": "integer",
+            "format": "int64",
+            "minimum": 1,
+            "description": "ID of a blog",
+            "required": true
+          },
           {
             "in": "body",
             "name": "newArticle",
@@ -533,17 +518,25 @@
             }
           }
         }
-      },
+      }
+    },
+    "/article/{id}/rate": {
       "put": {
-        "tags": [
-          "articles"
-        ],
         "summary": "Adding a rating to your article",
         "operationId": "AddRatingToArticle",
         "produces": [
           "application/json"
         ],
         "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "type": "integer",
+            "format": "int64",
+            "minimum": 1,
+            "description": "ID of a blog",
+            "required": true
+          },
           {
             "in": "body",
             "name": "RateArticle",
@@ -584,17 +577,80 @@
         }
       }
     },
-    "/comment/blog": {
+    "/users/{id}/comment": {
       "post": {
-        "tags": [
-          "comments"
+        "summary": "Adding a comment to the user",
+        "operationId": "AddCommentToUser",
+        "produces": [
+          "application/json"
         ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "type": "integer",
+            "format": "int64",
+            "minimum": 1,
+            "description": "ID of a user",
+            "required": true
+          },
+          {
+            "in": "body",
+            "name": "UserComment",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CommentDto"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operation successful"
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/ErrorDto"
+            }
+          },
+          "404": {
+            "description": "Resource not found",
+            "schema": {
+              "$ref": "#/definitions/ErrorDto"
+            }
+          },
+          "422": {
+            "description": "Validation error",
+            "schema": {
+              "$ref": "#/definitions/ErrorDto"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "$ref": "#/definitions/ErrorDto"
+            }
+          }
+        }
+      }
+    },
+    "/blogs/{id}/comment": {
+      "post": {
         "summary": "Adding a comment to the blog",
         "operationId": "AddCommentToBlog",
         "produces": [
           "application/json"
         ],
         "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "type": "integer",
+            "format": "int64",
+            "minimum": 1,
+            "description": "ID of a blog",
+            "required": true
+          },
           {
             "in": "body",
             "name": "BlogComment",
@@ -635,17 +691,23 @@
         }
       }
     },
-    "/comment/article": {
+    "/article/{id}/comment": {
       "post": {
-        "tags": [
-          "comments"
-        ],
         "summary": "Adding a comment to the article",
         "operationId": "AddCommentToArticle",
         "produces": [
           "application/json"
         ],
         "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "type": "integer",
+            "format": "int64",
+            "minimum": 1,
+            "description": "ID of a article",
+            "required": true
+          },
           {
             "in": "body",
             "name": "ArticleComment",
@@ -747,10 +809,6 @@
     "ArticleDto": {
       "type": "object",
       "properties": {
-        "categoryId": {
-          "type": "integer",
-          "format": "int64"
-        },
         "author": {
           "type": "string",
           "minLength": 2,
@@ -771,10 +829,6 @@
     "BlogDto": {
       "type": "object",
       "properties": {
-        "ownerId": {
-          "type": "integer",
-          "format": "int64"
-        },
         "blogType": {
           "$ref": "#/definitions/BlogType"
         },
@@ -851,11 +905,6 @@
     "CommentDto": {
       "type": "object",
       "properties": {
-        "ownerId": {
-          "type": "integer",
-          "format": "int64",
-          "minimum": 1
-        },
         "content": {
           "type": "string",
           "minLength": 0,
@@ -870,11 +919,6 @@
     "CategoryDto": {
       "type": "object",
       "properties": {
-        "blogId": {
-          "type": "integer",
-          "format": "int64",
-          "minimum": 1
-        },
         "name": {
           "type": "string",
           "minLength": 2,

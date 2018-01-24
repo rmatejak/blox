@@ -53,6 +53,11 @@ public class UserEntity extends AbstractEntity {
         blogEntity.setOwner(this);
     }
 
+    public void addComment(CommentEntity commentEntity){
+        this.comments.add(commentEntity);
+        commentEntity.setUserOwner(this);
+    }
+
     public void removeBlog(BlogEntity blogEntity) {
         this.blogs.remove(blogEntity);
         blogEntity.setOwner(null);

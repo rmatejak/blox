@@ -3,12 +3,12 @@ import com.google.common.base.Preconditions;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import pl.gov.coi.blox.api.mapper.CategoryMapper;
-import pl.gov.coi.blox.api.mapper.CategoryMapperImpl;
-import pl.gov.coi.blox.api.model.CategoryDto;
-import pl.gov.coi.blox.entity.BlogEntity;
+import pl.gov.coi.blox.api.mapper.ArticleMapper;
+import pl.gov.coi.blox.api.mapper.ArticleMapperImpl;
+import pl.gov.coi.blox.api.model.ArticleDto;
+import pl.gov.coi.blox.entity.ArticleEntity;
 import pl.gov.coi.blox.entity.CategoryEntity;
-import pl.gov.coi.blox.repository.BlogRepository;
+import pl.gov.coi.blox.repository.ArticleRepository;
 import pl.gov.coi.blox.repository.CategoryRepository;
 
 @Service
@@ -16,20 +16,23 @@ import pl.gov.coi.blox.repository.CategoryRepository;
 @RequiredArgsConstructor
 public class CategoryServiceImpl implements CategoryService{
 
-    private final BlogRepository blogRepository;
+    private final ArticleRepository articleRepository;
     private final CategoryRepository categoryRepository;
-    private final static CategoryMapper categorymapper = new CategoryMapperImpl();
+    private final static ArticleMapper articlemapper= new ArticleMapperImpl();
 
-    public void addCategoryToBlog(CategoryDto categoryDto){
-        Preconditions.checkNotNull(categoryDto, "Category cannot be NULL");
 
-        System.out.println("Dodanie kategorii: "
-                + categoryDto.getBlogId() + " "
-                + categoryDto.getName() + " "
-                + categoryDto.getDescription());
-        BlogEntity blogEntity = blogRepository.getOne(categoryDto.getBlogId());
-        CategoryEntity categoryEntity = categorymapper.map(categoryDto);
-        blogEntity.addCategory(categoryEntity);
+    @Override
+    public void addArticleToCategory(Long id, ArticleDto articleDto) {
+        Preconditions.checkNotNull(id,"Id cannot be NULL.");
+        Preconditions.checkNotNull(articleDto, "articleDto cannot be NULL.");
+
+        CategoryEntity categoryEntity = categoryRepository.findById(id);
+        if (categoryEntity == null) {
+            throw new BusinessException("Category not found");
+        }
+        ArticleEntity articleEntity = articlemapper.map(articleDto);
+        categoryEntity.addArticle(articleEntity);
+        articleRepository.save(articleEntity);
         categoryRepository.save(categoryEntity);
     }
 }

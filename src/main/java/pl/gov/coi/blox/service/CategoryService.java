@@ -1,6 +1,6 @@
 package pl.gov.coi.blox.service;
-import pl.gov.coi.blox.api.model.CategoryDto;
+import pl.gov.coi.blox.api.model.ArticleDto;
 
 public interface CategoryService {
-    void addCategoryToBlog(CategoryDto categoryDto);
+    void addArticleToCategory(Long id, ArticleDto articleDto);
 }

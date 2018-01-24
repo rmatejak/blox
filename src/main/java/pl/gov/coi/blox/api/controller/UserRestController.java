@@ -13,10 +13,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import pl.gov.coi.blox.api.UsersApi;
+import pl.gov.coi.blox.api.model.BlogDto;
+import pl.gov.coi.blox.api.model.CommentDto;
 import pl.gov.coi.blox.api.model.UserDto;
 import pl.gov.coi.blox.api.model.UserViewDto;
 import pl.gov.coi.blox.service.UserService;
 
+import javax.validation.Path;
 import javax.validation.Valid;
 import java.util.List;
 
@@ -29,9 +32,21 @@ public class UserRestController implements UsersApi{
 
 
     @Override
+    public ResponseEntity<Void> addBlogToUser(@Valid @PathVariable Long id, @Valid @RequestBody BlogDto blogDto) {
+        userService.addBlogToUser(id, blogDto);
+        return new ResponseEntity<Void>(HttpStatus.OK);
+    }
+
+    @Override
+    public ResponseEntity<Void> addCommentToUser(@Valid @PathVariable Long id,@Valid @RequestBody CommentDto userComment) {
+        userService.addCommentToUser(id, userComment);
+        return new ResponseEntity<Void>(HttpStatus.OK);
+    }
+
+    @Override
     public ResponseEntity<Void> addUser(@Valid @RequestBody UserDto userDto) {
         userService.addUser(userDto);
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<Void>(HttpStatus.OK);
     }
 
     @Override

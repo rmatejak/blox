@@ -2,6 +2,7 @@ package pl.gov.coi.blox.entity;
 
 import lombok.Getter;
 import lombok.Setter;
+import pl.gov.coi.blox.api.model.BlogType;
 import pl.gov.coi.blox.api.model.RateDto;
 import pl.gov.coi.blox.api.model.RateTypeDto;
 import pl.gov.coi.blox.api.model.StatusDto;
@@ -49,10 +50,12 @@ public class BlogEntity extends AbstractEntity {
 
     public void addCategory(CategoryEntity categoryEntity){
         this.categories.add(categoryEntity);
+        categoryEntity.setOwner(this);
     }
 
     public void addComment(CommentEntity commentEntity){
         this.comments.add(commentEntity);
+        commentEntity.setBlogOwner(this);
     }
 
     public void addRate(RateType rate){
